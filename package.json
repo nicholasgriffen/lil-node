@@ -1,0 +1,11 @@
+{
+  "name": "auth-server",
+  "version": "0.1.0",
+  "description": "a library-less node server handling authentication",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nicholasgriffen",
+  "license": "ISC"
+}
