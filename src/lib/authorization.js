@@ -49,6 +49,7 @@ module.exports = {
         try {
             var decoded = decode(encoded)
             var message;
+            
             if (decoded.valid) {
                 message = "VALID JWT"
             } else {
@@ -61,10 +62,11 @@ module.exports = {
                 message: message, 
                 data: decoded
             }))
+
         } catch(e) {
             console.error(`Error decoding JWT: ${e}`)
             res.statusCode = 422
-            res.end(`Expected query param jwt with value like [base64String].[base64String].[empty string], received ${encoded}`)
+            res.end(`Expected query param jwt with value like [base64String].[base64String].[base64String], received ${encoded}`)
         }
     }
 }
