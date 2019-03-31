@@ -7,7 +7,7 @@ function handleRoot(req, res) {
       login(req, res)
       break 
     default: 
-      handleUnknown(req, res)
+      _404(req, res)
   }
 }
 
@@ -17,27 +17,40 @@ function handleValidate(req, res) {
       validate(req, res)
       break 
     default: 
-      handleUnknown(req, res)
+      _404(req, res)
   }
 }
 
-function handleUnknown(req, res) {
-  console.log('404')
+function handleLogout(req, res) {
+  switch(req.method) {
+    case ('GET'):
+      logout(req, res)
+      break 
+    default: 
+      _404(req, res)
+  }
+}
+
+function _404(req, res) {
   res.statusCode = 404
-  res.end('No routes found')
+  res.end(`No routes matching ${req.method} to ${req.url}`)
 }
 
 module.exports = {
   handlers: function (req, res) {
-    switch (url.parse(req.url).pathname) {
+    var path = url.parse(req.url).pathname
+    switch (path) {
       case ('/'):
         handleRoot(req, res)
         break
       case('/validate'):
         handleValidate(req, res)
         break
+      case('/logout'):
+        handleLogout(req, res)
+        break
       default:
-        handleUnknown(req, res)
+        _404(req, res)
     }
   }
 }
