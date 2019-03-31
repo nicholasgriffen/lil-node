@@ -1,5 +1,5 @@
 var { set } = require('./cookie')
-var { encode } = require('./jwt')
+var { encode, decode } = require('./jwt')
 
 function validUser(name, pass) {
     return (name === "name" && pass === "pass")
@@ -31,6 +31,5 @@ module.exports = {
                 data: { jwt: encode(name) } //encode jwt 
             }))
         })
-        // return jwt 
     }
 }
