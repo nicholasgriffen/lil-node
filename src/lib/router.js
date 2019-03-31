@@ -1,5 +1,13 @@
-function handlePost(req, res) {
+var { login } = require('./authorization')
 
+function handleRoot(req, res) {
+  switch (req.method) {
+    case ('POST'):
+      login(req, res)
+      break 
+    default: 
+      handleUnknown(req, res)
+  }
 }
 
 function handleUnknown(req, res) {
@@ -9,10 +17,10 @@ function handleUnknown(req, res) {
 }
 
 module.exports = {
-  handlers: function (req /*http.IncomingMessage*/, res /*http.ServerResponse*/) {
-    switch (req.method) {
-      case ('POST'):
-        handlePost(req, res)
+  handlers: function (req, res) {
+    switch (req.url) {
+      case ('/'):
+        handleRoot(req, res)
         break
       default:
         handleUnknown(req, res)
