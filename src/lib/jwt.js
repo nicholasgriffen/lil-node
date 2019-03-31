@@ -1,6 +1,3 @@
-// base64 encode / decode method from 
-// https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js
-
 var crypto = require('crypto')
 var secret = process.env.SECRET || String(require('fs').readFileSync(require('path').join(__dirname, 'secret')))
 

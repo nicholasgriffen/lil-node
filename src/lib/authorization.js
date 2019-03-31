@@ -2,7 +2,7 @@ var url = require('url')
 var { set, expire } = require('./cookie')
 var { encode, decode } = require('./jwt')
 
-var cookieName = 'user'
+var cookieName = 'jwt'
 
 function validUser(name, pass) {
     return (name === "name" && pass === "pass")
@@ -32,7 +32,7 @@ module.exports = {
                 return 
             }
             //set cookie
-            set(res, cookieName, name)
+            set(res, cookieName, encode(name))
             
             res.statusCode = 201
             res.end(JSON.stringify({
