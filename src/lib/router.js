@@ -1,9 +1,20 @@
-var { login } = require('./authorization')
+var { login, validate } = require('./authorization')
+var url = require('url')
 
 function handleRoot(req, res) {
   switch (req.method) {
     case ('POST'):
       login(req, res)
+      break 
+    default: 
+      handleUnknown(req, res)
+  }
+}
+
+function handleValidate(req, res) {
+  switch(req.method) {
+    case ('GET'):
+      validate(req, res)
       break 
     default: 
       handleUnknown(req, res)
@@ -18,9 +29,12 @@ function handleUnknown(req, res) {
 
 module.exports = {
   handlers: function (req, res) {
-    switch (req.url) {
+    switch (url.parse(req.url).pathname) {
       case ('/'):
         handleRoot(req, res)
+        break
+      case('/validate'):
+        handleValidate(req, res)
         break
       default:
         handleUnknown(req, res)

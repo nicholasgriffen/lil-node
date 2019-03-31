@@ -2,6 +2,10 @@
 // JWTs MAY also be created without a signature or encryption.  An Unsecured
 // JWT is a JWS using the "alg" Header Parameter value "none" and with
 // the empty string for its JWS Signature value
+
+// base64 encode / decode method from 
+// https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js
+
 module.exports = {
     encode: function(name) {
         var header = Buffer.from(JSON.stringify({

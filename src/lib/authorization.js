@@ -1,3 +1,4 @@
+var url = require('url')
 var { set } = require('./cookie')
 var { encode, decode } = require('./jwt')
 
@@ -19,7 +20,7 @@ module.exports = {
             
             if (!validUser(name, pass)) {
                 res.statusCode = 422 
-                res.end(`expected object like {"name": "name", "pass": "pass"}, received ${user}`)
+                res.end(`Expected object like {"name": "name", "pass": "pass"}, received ${user}`)
                 return 
             }
             //set cookie
@@ -31,5 +32,22 @@ module.exports = {
                 data: { jwt: encode(name) } //encode jwt 
             }))
         })
+    }, 
+    
+    validate: function(req, res) {
+        var params = url.parse(req.url, true).query
+        var encoded = params.jwt
+
+        try {
+            var decoded = decode(encoded)
+            res.statusCode = 200 
+            res.end(JSON.stringify({
+                message: "Validated JWT", 
+                data: { validated: decoded}
+            }))
+        } catch(e) {
+            res.statusCode = 422
+            res.end(`Expected query param jwt with value like [base64String].[base64String].[empty string], received ${encoded}`)
+        }
     }
 }
