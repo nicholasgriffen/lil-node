@@ -9,6 +9,12 @@ function validUser(name, pass) {
 }
 
 module.exports = {
+    logout: function(req, res) {
+        expire(res, cookieName)
+        res.statusCode = 200 
+        res.end('Logged out')
+    }, 
+    
     login: function(req, res) {
         var user = ''
 
@@ -42,20 +48,23 @@ module.exports = {
 
         try {
             var decoded = decode(encoded)
+            var message;
+            if (decoded.valid) {
+                message = "VALID JWT"
+            } else {
+                message = "INVALID JWT - signature does not match"
+            }
+
             res.statusCode = 200 
+
             res.end(JSON.stringify({
-                message: "Validated JWT", 
-                data: { validated: decoded}
+                message: message, 
+                data: decoded
             }))
         } catch(e) {
+            console.error(`Error decoding JWT: ${e}`)
             res.statusCode = 422
             res.end(`Expected query param jwt with value like [base64String].[base64String].[empty string], received ${encoded}`)
         }
-    }, 
-
-    logout: function(req, res) {
-        expire(res, cookieName)
-        res.statusCode = 200 
-        res.end('Logged out')
     }
 }

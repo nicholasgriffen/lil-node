@@ -1,16 +1,18 @@
-// per RFC 7519 Section 6
-// JWTs MAY also be created without a signature or encryption.  An Unsecured
-// JWT is a JWS using the "alg" Header Parameter value "none" and with
-// the empty string for its JWS Signature value
-
 // base64 encode / decode method from 
 // https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js
+
+var crypto = require('crypto')
+var secret = process.env.SECRET || String(require('fs').readFileSync(require('path').join(__dirname, 'secret')))
+
+function digest(header, payload) {
+    return crypto.createHmac("sha256", secret).update(`${header}.${payload}`).digest("base64")
+}
 
 module.exports = {
     encode: function(name) {
         var header = Buffer.from(JSON.stringify({
             typ: "JWT", 
-            alg: "none"
+            alg: "HS256"
         })).toString("base64")
 
         var claimsSet = Buffer.from(JSON.stringify({
@@ -19,7 +21,7 @@ module.exports = {
             userName: name
         })).toString("base64")
 
-        var signature = ''
+        var signature = digest(header, claimsSet)
         
         return `${header}.${claimsSet}.${signature}`
     }, 
@@ -27,11 +29,13 @@ module.exports = {
         var split = jwt.split('.')
         var header = JSON.parse(Buffer.from(split[0], "base64").toString("utf8"))
         var payload = JSON.parse(Buffer.from(split[1], "base64").toString("utf8"))
+        var valid = digest(split[0], split[1]) === split[2]
 
         return {
             header: header, 
             payload: payload, 
-            signature: ''
+            signature: split[2],
+            valid: valid
         }
     }
 }
