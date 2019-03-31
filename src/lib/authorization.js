@@ -28,7 +28,7 @@ module.exports = {
             res.statusCode = 201
             res.end(JSON.stringify({
                 message: "Logged in",
-                data: encode() //encode jwt 
+                data: { jwt: encode(name) } //encode jwt 
             }))
         })
         // return jwt 
