@@ -1,4 +1,4 @@
-var { login, validate } = require('./authorization')
+var { login, logout, validate } = require('./authorization')
 var url = require('url')
 
 function handleRoot(req, res) {
