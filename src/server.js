@@ -1,5 +1,5 @@
 var http = require('http')
-var router = require('./lib/router')
+var router = require('./router')
 
 var PORT = process.env.PORT || 3030
 var server = http.createServer(router.handlers)
