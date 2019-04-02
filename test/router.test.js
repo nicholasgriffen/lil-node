@@ -31,7 +31,6 @@ module.exports = {
         console.log('router#handlers accepts a GET to /validate')
         assert.doesNotThrow(function() { router.handlers(mockReq('/validate', 'GET'), res) })
         assert.notEqual(res.statusCode, 404, 'route should not 404')
-
         
         console.log('router#handlers accepts a GET to /logout')
         assert.doesNotThrow(function() { router.handlers(mockReq('/logout', 'GET'), res) })
