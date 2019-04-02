@@ -8,5 +8,10 @@ module.exports = {
   start: function () {
     console.log(`Server listening on ${PORT}`)
     server.listen(PORT)
+  },
+
+  stop: function() {
+    server.close()
+    console.log(`Server stopped`)
   }
 }
