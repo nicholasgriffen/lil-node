@@ -4,7 +4,7 @@
   "description": "a library-less node server handling authentication",
   "main": "index.js",
   "scripts": {
-    "test": "node ../test/index.js", 
+    "test": "node test/index.js", 
     "start": "node index.js"
   },
   "author": "nicholasgriffen",
