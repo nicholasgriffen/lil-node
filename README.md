@@ -1,6 +1,6 @@
 # Dependency-free Auth Server
 ## Which and why    
-    I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge. Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.
+I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge.    Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.
 
 ## Running the tests 
 `npm test`
@@ -15,17 +15,25 @@ test/index.js loads each of the test suites into an array, and calls run with `r
 Start the server with `npm start` and point your browser or http client to localhost:3030 (or another port if you've set process.env.PORT) 
 
 #### Endpoints 
-##### '/'
-
-GET    
-   - return: public/index.html 
-POST 
-   - body: `JSON: { user: String, pass: String }` 
-   - return: 
-      - success: 
-         - status: 201
-         - body: `JSON String { message: "Logged in", data: { jwt: JWT } } } `
-      
+##### /
+###### GET    
+return: public/index.html
+###### POST
+body: `JSON: { user: String, pass: String }`     
+return:       
+- success: 
+  - status: 201
+  - body: `JSON String: { message: "Logged in", data: { jwt: JWT } } } `
+  - cookies: `jwt={JWT}`
+- failure: 
+  - status: 422
+  - body: `String: Expected object like {"name": "name", "pass": "pass"}, received ${body}`
+##### /logout
+###### GET 
+return:       
+- status: 200
+- body: `String: Logged out`
+- cookies: `jwt=''; Expires=${new Date('January 1 1990')}`      
 
 ● What Operating System (+ service pack) and libraries are required
 
