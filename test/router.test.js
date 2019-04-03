@@ -1,12 +1,13 @@
 var router = require('../src/router')
+/*
+    this suite is only concerned with the high level route handling 
+    so properties of req and res, other than statusCode, are not checked
+    res and req methods are not truly invoked, and event handler callbacks passed to req.on are not invoked
+    lower level functionality is tested in other suites 
+*/
 var res = {
-    statusCode: 0,
-    end: function(data) {
-        return data 
-    }, 
-    setHeader: function(header) {
-        return header
-    }
+    end: function() {},
+    setHeader: function() {}
 }
 
 function mockReq(url, method) {

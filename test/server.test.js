@@ -16,7 +16,7 @@ module.exports = {
             assert.ok(res)
             //wait for successful start test before stopping server
             console.log('server#stop is a function')    
-            assert.equal(typeof server.stop, 'function', 'expected start to be a function')
+            assert.equal(typeof server.stop, 'function', 'expected stop to be a function')
     
             console.log('server#stop stops the server')
             server.stop()
