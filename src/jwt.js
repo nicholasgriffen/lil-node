@@ -1,11 +1,11 @@
 var crypto = require('crypto')
 /* 
- Normally I would protecte the secret through an environment variable, or a .gitignore'd local file.
+ Normally I would protect the secret through an environment variable, or a .gitignore'd local file.
  In this case for ease of use / project review I have hardcoded a secret
  Prior to the hardcode, I wrote the line this way:
- var secret = process.env.SECRET || String(require('fs').readFileSync(require('path').join(__dirname, 'secret')))
+ var secret =  || String(require('fs').readFileSync(require('path').join(__dirname, 'secret')))
  */
-var secret = '1439ab18547537793b8edff4718f5d4082f704f249fdd6cd2d1c0b57fbf9fc0a27f6f6640ac8988ac0878d409f9da265'
+var secret = process.env.SECRET || 'THIS_IS_NOT_SECURE'
 
 function digest(header, payload) {
     return crypto.createHmac("sha256", secret).update(`${header}.${payload}`).digest("base64")

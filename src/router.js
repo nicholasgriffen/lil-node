@@ -1,8 +1,13 @@
 var url = require('url')
+var fs = require('fs')
+var path = require('path')
 var { login, logout, validate } = require('./authorization')
 
 function handleRoot(req, res) {
   switch (req.method) {
+    case ('GET'):
+      index(req, res)
+      break
     case ('POST'):
       login(req, res)
       break 
@@ -34,6 +39,12 @@ function handleLogout(req, res) {
 function _404(req, res) {
   res.statusCode = 404
   res.end(`No routes matching ${req.method} to ${req.url}`)
+}
+
+function index(req, res) {
+  var index = fs.readFileSync(path.join(__dirname, '../public/index.html'))
+  res.writeHead(200, 'Content-Type: text/html')
+  res.end(index)
 }
 
 module.exports = {

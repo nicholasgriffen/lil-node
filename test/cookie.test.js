@@ -7,7 +7,7 @@ var res = {
 }
 var name = 'test'
 var value = 'success'
-var setExpected =  `${name}=${value}; HttpOnly`
+var setExpected =  `${name}=${value}`
 var expireExpected =  `${name}=''; Expires=${new Date('January 1 1990')}`
 
 module.exports = {

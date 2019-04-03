@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Auth-Server</title>
+</head>
+<body>
+    <div id="error"></div>
+    <div id="root">
+        <form>
+            <label for="name">
+                    Name:
+                <input id="name" type="text" />
+            </label>
+            <label for="pass">
+                Password:
+                <input id="pass" type="text" />
+            </label>
+            <input type="submit" value="Log In">
+        </form>    
+    </div>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault()
+        fetch('/', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: document.getElementById('name').value,
+                pass: document.getElementById('pass').value
+            })
+        }).then(function(res) {
+            if (res.status === 422) {
+                return res.text()
+            } else {
+                showHome()
+                setHomeListeners()
+                return ''
+            }
+        }).then(setErrorText).catch(setErrorText)
+    })
+
+    function showHome() {
+        document.getElementById('root').innerHTML = `
+        <h1>Welcome Home</h1>
+        <div id="validity"></div>
+        <label for="jwt">Enter a JWT, or leave blank to check the JWT stored in your cookies</label>
+        <input type="text" name="jwt" id="jwt"></input>
+        <button id="logout">Log out</button>
+        <button id="validate">Check JWT validity</button>
+        ` 
+    }
+
+    function setHomeListeners() {
+        document.getElementById("logout").addEventListener("click", function(e) {
+            fetch('/logout').then(function(res) {
+                if (res.status === 200) {
+                    window.location.href = '/'
+                }
+            }).catch(setErrorText)
+        })
+        document.getElementById("validate").addEventListener("click", function(e) {
+            // validation will sometimes fail if jwt is not URI encoded
+            var jwt = document.getElementById('jwt').value || document.cookie.replace('jwt=', '')
+            fetch(`/validate?jwt=${encodeURIComponent(jwt)}`).then(function(res) {
+                return res.json()
+            }).then(function(msg) {
+                document.getElementById("validity").innerText = msg.message
+            }).catch(setErrorText)
+        })
+    }
+
+    function setErrorText(text) {
+        document.getElementById('error').innerText = text
+    }
+</script>
+</html>
