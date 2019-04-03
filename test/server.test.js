@@ -1,5 +1,6 @@
-var server = require('../src/server')
 var http = require('http')
+var server = require('../src/server')
+
 var PORT = process.env.PORT || 3030
 
 module.exports = {

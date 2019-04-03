@@ -1,4 +1,5 @@
 var auth = require('../src/authorization')
+
 var user = {name: 'test', pass: 'test'}
 var res = {
     setHeader: function(name, value) {

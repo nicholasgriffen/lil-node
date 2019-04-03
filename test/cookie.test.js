@@ -1,4 +1,5 @@
 var cookie = require('../src/cookie')
+
 var res = {
     setHeader: function(name, value) {
         this[name] = value

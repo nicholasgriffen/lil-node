@@ -1,4 +1,5 @@
 var jwt = require('../src/jwt')
+
 var param = 'test'
 var expectedKeys = ["header", "payload", "signature", "valid"]
 
