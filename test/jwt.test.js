@@ -23,6 +23,7 @@ module.exports = {
 
         console.log('jwt#encode returns a string that can be run through jwt#decode to return an object with header, payload, signature, and valid keys, where valid will be true')
         var decoded = jwt.decode(actual) 
+        //TODO: test validity of jwt.encode separately from behavior of jwt.decode
         assert.deepEqual(Object.keys(decoded), expectedKeys)
         assert.ok(decoded.valid)
     }

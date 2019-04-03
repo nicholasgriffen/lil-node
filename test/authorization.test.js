@@ -8,7 +8,7 @@ var res = {
         try {
             this.data = JSON.parse(data)
         } catch(e) {
-            //handle case where data is a string, as opposted to stringified object, such as "Logged out"
+            //handle case where data is a string such as "Logged out", as opposed to stringified object
             this.data = data
         }
     }   
