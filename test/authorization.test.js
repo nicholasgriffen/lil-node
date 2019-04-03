@@ -1,4 +1,3 @@
-var assert = require('assert').strict
 var auth = require('../src/authorization')
 var user = {name: 'test', pass: 'test'}
 var res = {
@@ -25,7 +24,7 @@ var req = {
     }
 }
 module.exports = {
-    run: function() {
+    run: function(assert) {
         console.log('Running test suite for src/authorization.js')
         
         console.log('authorization#logout is a function')

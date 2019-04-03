@@ -1,4 +1,3 @@
-var assert = require('assert').strict
 var router = require('../src/router')
 var res = {
     statusCode: 0,
@@ -18,7 +17,7 @@ function mockReq(url, method) {
     }
 }
 module.exports = {
-    run: function() {
+    run: function(assert) {
         console.log('Running test suite for src/lib/router.js')
     
         console.log('router#handlers is a function')

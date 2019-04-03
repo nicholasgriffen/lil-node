@@ -1,10 +1,9 @@
-var assert = require('assert').strict
 var server = require('../src/server')
 var http = require('http')
 var PORT = process.env.PORT || 3030
 
 module.exports = {
-    run: function() {
+    run: function(assert) {
         console.log('Running test suite for src/server.js')
         
         console.log('server#start is a function')

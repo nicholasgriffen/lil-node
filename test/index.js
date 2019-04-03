@@ -1,5 +1,13 @@
-var testSuites = [ require('./authorization.test'), require('./cookie.test'), require('./jwt.test'), require('./router.test'), require('./server.test') ]
+var assert = require('assert').strict
+
+var testSuites = [ 
+    require('./authorization.test'), 
+    require('./cookie.test'), 
+    require('./jwt.test'), 
+    require('./router.test'), 
+    require('./server.test') 
+]
 
 testSuites.forEach(function(suite) {
-    suite.run()
+    suite.run(assert)
 })

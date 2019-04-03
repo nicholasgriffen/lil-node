@@ -1,10 +1,9 @@
-var assert = require('assert').strict
 var jwt = require('../src/jwt')
 var param = 'test'
 var expectedKeys = ["header", "payload", "signature", "valid"]
 
 module.exports = {
-    run: function() {
+    run: function(assert) {
         console.log('Running test suite for src/jwt.js')
 
         console.log('jwt#encode is a function')

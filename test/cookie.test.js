@@ -1,4 +1,3 @@
-var assert = require('assert').strict 
 var cookie = require('../src/cookie')
 var res = {
     setHeader: function(name, value) {
@@ -11,7 +10,7 @@ var setExpected =  `${name}=${value}; HttpOnly`
 var expireExpected =  `${name}=''; Expires=${new Date('January 1 1990')}`
 
 module.exports = {
-    run: function() {
+    run: function(assert) {
         console.log('Running test suite for src/cookie.js')
 
         console.log('cookie#set is a function')
