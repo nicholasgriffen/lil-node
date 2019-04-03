@@ -1,4 +1,4 @@
-var testSuites = [ require('./server.test'), require('./router.test') ]
+var testSuites = [ require('./jwt.test'), require('./router.test'), require('./server.test') ]
 
 testSuites.forEach(function(suite) {
     suite.run()
