@@ -1,5 +1,5 @@
-var { login, logout, validate } = require('./authorization')
 var url = require('url')
+var { login, logout, validate } = require('./authorization')
 
 function handleRoot(req, res) {
   switch (req.method) {
