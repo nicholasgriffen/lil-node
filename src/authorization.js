@@ -5,7 +5,7 @@ var { encode, decode } = require('./jwt')
 var cookieName = 'jwt'
 
 function validUser(name, pass) {
-    return (name === "name" && pass === "pass")
+    return (name && pass)
 }
 
 module.exports = {
@@ -23,22 +23,30 @@ module.exports = {
         })
         
         req.on('end', function() {
-            var name = JSON.parse(user)["name"]
-            var pass = JSON.parse(user)["pass"]
-            
-            if (!validUser(name, pass)) {
+            try {
+                // gracefully handle JSON parsing errors
+                var name = JSON.parse(user)["name"]
+                var pass = JSON.parse(user)["pass"]
+                
+                if (!validUser(name, pass)) {
+                    res.statusCode = 422 
+                    res.end(`Expected object like {"name": "name", "pass": "pass"}, received ${user}`)
+                    return 
+                }
+                var jwt = encode(name)
+                set(res, cookieName, jwt)
+                
+                res.statusCode = 201
+                res.end(JSON.stringify({
+                    message: "Logged in",
+                    data: { jwt:  jwt }  
+                }))
+            } catch (e) {
                 res.statusCode = 422 
                 res.end(`Expected object like {"name": "name", "pass": "pass"}, received ${user}`)
-                return 
+                return
             }
-            //set cookie
-            set(res, cookieName, encode(name))
-            
-            res.statusCode = 201
-            res.end(JSON.stringify({
-                message: "Logged in",
-                data: { jwt: encode(name) } //encode jwt 
-            }))
+        
         })
     }, 
     
@@ -47,6 +55,7 @@ module.exports = {
         var encoded = params.jwt
 
         try {
+            // gracefully handle JSON parsing errors in the decode method
             var decoded = decode(encoded)
             var message;
             

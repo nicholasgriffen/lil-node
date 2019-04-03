@@ -14,6 +14,7 @@ module.exports = {
         server.start()
         
         http.get(`http://localhost:${PORT}`, function(res) {
+            assert.ok(res)
             //wait for successful start test before stopping server
             console.log('server#stop is a function')    
             assert.equal(typeof server.stop, 'function', 'expected start to be a function')
