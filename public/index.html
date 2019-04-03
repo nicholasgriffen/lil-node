@@ -59,12 +59,15 @@
             }).catch(setErrorText)
         })
         document.getElementById("validate").addEventListener("click", function(e) {
-            // validation will sometimes fail if jwt is not URI encoded
             var jwt = document.getElementById('jwt').value || document.cookie.replace('jwt=', '')
+            // validation will sometimes fail if jwt is not URI encoded
             fetch(`/validate?jwt=${encodeURIComponent(jwt)}`).then(function(res) {
+                if (res.status === 422) {
+                    return res.text()
+                }
                 return res.json()
             }).then(function(msg) {
-                document.getElementById("validity").innerText = msg.message
+                document.getElementById("validity").innerText = msg.message || `INVALID JWT - ${msg}`
             }).catch(setErrorText)
         })
     }
