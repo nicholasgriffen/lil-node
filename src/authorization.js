@@ -44,7 +44,6 @@ module.exports = {
             } catch (e) {
                 res.statusCode = 422 
                 res.end(`Expected object like {"name": "name", "pass": "pass"}, received ${user}`)
-                return
             }
         
         })
