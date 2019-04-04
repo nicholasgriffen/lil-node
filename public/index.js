@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     function setErrorText(text) {
+        if (String(text).includes('Failed to fetch')) {
+            text = `Server appears to be down - is an http server at ${window.location}?`
+        }
         document.getElementById('error').innerText = text
     }
 })
