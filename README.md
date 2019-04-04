@@ -36,7 +36,7 @@ return:
   - body: `String: Expected object like {"name": "name", "pass": "pass"}, received ${body}`
 ##### /validate
 ###### GET
-query params: `?jwt=[base64String].[base64String].[base64String]`
+query params: `?jwt=[base64String].[base64String].[base64String]`    
 return:       
 - success: 
   - status: 200
