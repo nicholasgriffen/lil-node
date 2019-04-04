@@ -16,6 +16,16 @@ function handleRoot(req, res) {
   }
 }
 
+function handleJs(req, res) {
+  switch (req.method) {
+    case ('GET'):
+      js(req, res)
+      break
+    default: 
+      _404(req, res)
+  }
+}
+
 function handleValidate(req, res) {
   switch(req.method) {
     case ('GET'):
@@ -47,12 +57,22 @@ function index(req, res) {
   res.end(index)
 }
 
+function js(req, res) {
+  var js = fs.readFileSync(path.join(__dirname, '../public/index.js'))
+  res.writeHead(200, 'Content-Type: text/javascript')
+  res.end(js)
+}
+
+
 module.exports = {
   handlers: function (req, res) {
     var path = url.parse(req.url).pathname
     switch (path) {
-      case ('/'):
+      case('/'):
         handleRoot(req, res)
+        break
+      case('/index.js'):
+        handleJs(req, res)
         break
       case('/validate'):
         handleValidate(req, res)
