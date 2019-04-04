@@ -11,7 +11,7 @@
 I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge. Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.    
 
 ## OS Requirements    
-Developed with node 11.9.0 but should work with node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned node versions.
+Developed with Node 11.9.0 but should work with Node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but Node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned Node versions.
 
 ## How to use
 ### Server
