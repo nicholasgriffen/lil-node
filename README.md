@@ -79,6 +79,14 @@ Purpose: Adhere to JWT standards outlined in [RFC 7519](https://tools.ietf.org/h
 License: None    
 Website: https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js    
 
+Sakura CSS is used to provide a light, sensible set of CSS defaults
+
+Name: oxalorg
+Version: 1.0.0    
+Purpose: Provide style, responsiveness, an aesthetic that I enjoy  
+License: MIT    
+Website: https://oxal.org/projects/sakura/  
+
 ## Libraries / Dependencies 
 None
 
