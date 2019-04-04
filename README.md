@@ -84,7 +84,7 @@ Website: https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-i
 
 Sakura CSS is used to provide a light, sensible set of CSS defaults
 
-Name: oxalorg
+Name: oxalorg    
 Version: 1.0.0    
 Purpose: Provide style, responsiveness, an aesthetic that I enjoy  
 License: MIT    
