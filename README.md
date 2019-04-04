@@ -8,10 +8,10 @@
 [Design decisions and clarifications](#design-decisions-and-clarifications)
 
 ## Which and why    
-I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge.    Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.    
+I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge. Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.    
 
 ## OS Requirements    
-Developed with node 11 but should work with node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned node versions.
+Developed with node 11.9.0 but should work with node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned node versions.
 
 ## How to use 
 ### Server
@@ -36,7 +36,7 @@ return:
   - body: `String: Expected object like {"name": "name", "pass": "pass"}, received ${body}`
 ##### /validate
 ###### GET
-query params: `?jwt=[base64String].[base64String].[base64String]`
+query params: `?jwt=[base64String].[base64String].[base64String]`    
 return:       
 - success: 
   - status: 200
@@ -62,12 +62,13 @@ test/index.js loads each of the test suites into an array, and calls run with `r
 
 
 ## Design decisions and clarifications    
-Perhaps the most jarring design decision is a deliberate avoidance of dependencies - no Express, jwt, or Mocha/Chai, in particular. I made this decision to challenge myself, to learn, and to make the application as lean as possible.    
-General server flow:     
-        index.js invokes a function exported by src/server.js, which starts an http server and logs out the port.     
-        server.js invokes a function exported by lib/router.js, which invokes various handlers based on the path of the incoming http request.     
-        lib/authorization.js handles login, logout, and JWT verification, using functions exported by lib/cookie.js to create and destroy cookies, and functions exported by lib/jwt.js to encode and decode JWTs.         
-
+Perhaps the most jarring design decision is a deliberate avoidance of dependencies - no Express, jwt, or Mocha/Chai, in particular. I made this decision to challenge myself, to learn, and to make the application as lean as possible. All server code with the exception of the application entry point, index.js, resides in the src/ folder. Client code is in the public/ folder.  
+### General server flow
+index.js invokes a function exported by src/server.js, which starts an http server and logs out the port.     
+server.js invokes a function exported by src/router.js, which invokes various handlers based on the path of the incoming http request.    authorization.js handles login, logout, and JWT verification, using functions exported by cookie.js to create and destroy cookies, and functions exported by jwt.js to encode and decode JWTs.  
+### Client 
+The client application is a very simple "SPA" that replaces parts of the DOM upon successful login. public/index.html is served in response to a GET to '/', and public/index.js handles the DOM manipulation as well as interaction with the server. 
+        
 ## External code    
 I borrow the strategy for base64 encoding strings from a StackOverflow post:    
 Name:    
@@ -77,4 +78,15 @@ Version: None
 Purpose: Adhere to JWT standards outlined in [RFC 7519](https://tools.ietf.org/html/rfc7519)    
 License: None    
 Website: https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js    
+
+Sakura CSS is used to provide a light, sensible set of CSS defaults
+
+Name: oxalorg
+Version: 1.0.0    
+Purpose: Provide style, responsiveness, an aesthetic that I enjoy  
+License: MIT    
+Website: https://oxal.org/projects/sakura/  
+
+## Libraries / Dependencies 
+None
 
