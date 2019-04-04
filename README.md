@@ -63,11 +63,11 @@ test/index.js loads each of the test suites into an array, and calls run with `r
 
 ## Design decisions and clarifications    
 Perhaps the most jarring design decision is a deliberate avoidance of dependencies - no Express, jwt, or Mocha/Chai, in particular. I made this decision to challenge myself, to learn, and to make the application as lean as possible.    
-### General server flow:     
+### General server flow
 index.js invokes a function exported by src/server.js, which starts an http server and logs out the port.     
 server.js invokes a function exported by lib/router.js, which invokes various handlers based on the path of the incoming http request.    authorization.js handles login, logout, and JWT verification, using functions exported by cookie.js to create and destroy cookies, and functions exported by jwt.js to encode and decode JWTs.  
 ### Client 
-The client application is a very simple "SPA" that replaces parts of the DOM upon successful login.
+The client application is a very simple "SPA" that replaces parts of the DOM upon successful login. public/index.html is served in response to a GET to '/', and public/index.js handles the DOM manipulation as well as interaction with the server. 
         
 ## External code    
 I borrow the strategy for base64 encoding strings from a StackOverflow post:    
