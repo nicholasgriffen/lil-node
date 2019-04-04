@@ -1,6 +1,6 @@
 {
   "name": "auth-server",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "a dependency-free node server handling user authentication with JWTs and cookies",
   "main": "index.js",
   "scripts": {
@@ -9,5 +9,8 @@
     "dev": "npx nodemon index.js"
   },
   "author": "nicholasgriffen",
-  "license": "ISC"
+  "license": "ISC", 
+  "engines": {
+    "node": "11.9.0"
+  }
 }
