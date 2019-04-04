@@ -8,10 +8,10 @@
 [Design decisions and clarifications](#design-decisions-and-clarifications)
 
 ## Which and why    
-I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge.    Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.    
+I chose to develop Authentication Server. It is, to me, the most interesting and most generally applicable challenge. Most interesting because I have an affinity for server-side work and application security. Most generally applicable because, while the other applications are good for showing to others, the Authentication Server is an opportunity to build small libraries for myself, and to write code I may reuse in other projects. While the challenges of JWT processing, Node servers, cookies, and testing are often solved with dependencies, I imposed an added condition on the project - it uses no external libraries. Testing, JWT, server, crypto - all done with vanilla Node.    
 
 ## OS Requirements    
-Developed with node 11 but should work with node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned node versions.
+Developed with node 11.9.0 but should work with node 9.10.1+. In particular, the test suites use `require('assert').strict`, which seems to have been introduced in 9.10.1. Nothing but node is required to run the server application - a web browser is required to run the client housed in `/public`. Should run on any OS that runs aforementioned node versions.
 
 ## How to use 
 ### Server
@@ -78,4 +78,7 @@ Version: None
 Purpose: Adhere to JWT standards outlined in [RFC 7519](https://tools.ietf.org/html/rfc7519)    
 License: None    
 Website: https://stackoverflow.com/questions/6182315/how-to-do-base64-encoding-in-node-js    
+
+## Libraries / Dependencies 
+None
 
