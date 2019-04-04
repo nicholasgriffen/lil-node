@@ -17,6 +17,9 @@ Developed with node 11 but should work with node 9.10.1+. In particular, the tes
 ### Server
 Start the server with `npm start` and point your browser or http client to localhost:3030 (or another port if you've set process.env.PORT) 
 
+### Client 
+At present, one simply needs to enter any text in the name and password fields to be logged in. From there, click the verify button to send your JWT to the server for validation. Or, click the logout button to expire the cookie and be directed back to the log in page. You may also enter a different JWT to send to the server to validation. If the JWT was not signed with the server's secret, the JWT will be deemed invalid. 
+
 #### Endpoints 
 ##### /
 ###### GET    
