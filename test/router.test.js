@@ -7,7 +7,8 @@ var router = require('../src/router')
 */
 var res = {
     end: function() {},
-    setHeader: function() {}
+    setHeader: function() {}, 
+    writeHead: function() {}
 }
 
 function mockReq(url, method) {
@@ -24,6 +25,14 @@ module.exports = {
         console.log('router#handlers is a function')
         assert.equal(typeof router.handlers, 'function', 'expected handlers to be a function')
         
+        console.log('router#handlers accepts a GET to /')
+        router.handlers(mockReq('/', 'GET'), res)
+        assert.notEqual(res.statusCode, 404, 'route should not 404')
+
+        console.log('router#handlers accepts a GET to /index.js')
+        router.handlers(mockReq('/index.js', 'GET'), res)
+        assert.notEqual(res.statusCode, 404, 'route should not 404')
+
         console.log('router#handlers accepts a POST to /')
         router.handlers(mockReq('/', 'POST'), res)
         assert.notEqual(res.statusCode, 404, 'route should not 404')
