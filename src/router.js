@@ -1,17 +1,15 @@
 var url = require('url')
-var fs = require('fs')
-var path = require('path')
-var { login, logout, validate } = require('./authorization')
+var routes = {
+  public:
+    require('./public')
+}
 
 function handleRoot(req, res) {
   switch (req.method) {
     case ('GET'):
-      index(req, res)
+      routes.public.html(req, res)
       break
-    case ('POST'):
-      login(req, res)
-      break 
-    default: 
+    default:
       _404(req, res)
   }
 }
@@ -19,29 +17,19 @@ function handleRoot(req, res) {
 function handleJs(req, res) {
   switch (req.method) {
     case ('GET'):
-      js(req, res)
+      routes.public.js(req, res)
       break
-    default: 
+    default:
       _404(req, res)
   }
 }
 
-function handleValidate(req, res) {
-  switch(req.method) {
+function handleCss(req, res) {
+  switch (req.method) {
     case ('GET'):
-      validate(req, res)
-      break 
-    default: 
-      _404(req, res)
-  }
-}
-
-function handleLogout(req, res) {
-  switch(req.method) {
-    case ('GET'):
-      logout(req, res)
-      break 
-    default: 
+      routes.public.css(req, res)
+      break
+    default:
       _404(req, res)
   }
 }
@@ -51,34 +39,19 @@ function _404(req, res) {
   res.end(`No routes matching ${req.method} to ${req.url}`)
 }
 
-function index(req, res) {
-  var index = fs.readFileSync(path.join(__dirname, '../public/index.html'))
-  res.writeHead(200, 'Content-Type: text/html')
-  res.end(index)
-}
-
-function js(req, res) {
-  var js = fs.readFileSync(path.join(__dirname, '../public/index.js'))
-  res.writeHead(200, 'Content-Type: text/javascript')
-  res.end(js)
-}
-
-
 module.exports = {
   handlers: function (req, res) {
     var path = url.parse(req.url).pathname
+
     switch (path) {
-      case('/'):
+      case ('/'):
         handleRoot(req, res)
         break
-      case('/index.js'):
+      case ('/index.js'):
         handleJs(req, res)
         break
-      case('/validate'):
-        handleValidate(req, res)
-        break
-      case('/logout'):
-        handleLogout(req, res)
+      case ('index.css'):
+        handleCss(req, res)
         break
       default:
         _404(req, res)

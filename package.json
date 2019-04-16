@@ -1,16 +1,19 @@
 {
-  "name": "auth-server",
-  "version": "1.0.0",
-  "description": "a dependency-free node server handling user authentication with JWTs and cookies",
+  "name": "lil-node",
+  "version": "1.1.0",
+  "description": "a little node server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "node test/index.js", 
-    "dev": "npx nodemon index.js"
+    "test": "node test/index.js",
+    "dev": "node_modules/.bin/nodemon index.js"
   },
   "author": "nicholasgriffen",
-  "license": "ISC", 
+  "license": "ISC",
   "engines": {
     "node": "11.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
   }
 }
